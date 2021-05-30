@@ -18,6 +18,6 @@
 
 
 # 计划   
-+ 生成 data.txt 文件  
-+ 将 data.txt 的音视频地址传递给mpv   
-+ 弹幕文件处理   
+[x] 生成 data.txt 文件  
+[x] 将 data.txt 的音视频地址传递给mpv   
+[ ] 弹幕文件处理   
