@@ -7,8 +7,6 @@ import sys
 # import subprocess
 
 
-
-
 def read_config():
 
     global CACHE_SIZE
@@ -35,10 +33,12 @@ def write_cache(raw_url, cmd):
         cache_url_list.pop()
 
     with open(cache_address, 'w', encoding='utf-8') as cache:
-        new = 'url@@' + raw_url.strip('/') + '|cmd@@' + cmd.strip()
-        cache.write("%s%s" % (new, os.linesep))
+        new = 'url@@' + raw_url.strip('/') + '|cmd@@' + cmd
+        # cache.write("%s%s" % (new.strip(), os.linesep))
+        cache.write(new.strip() + '\n')
         for x in cache_url_list:
-            cache.write("%s%s" % (x.strip(), os.linesep))
+            # cache.write("%s%s" % (x.strip(), os.linesep))
+            cache.write(x.strip() + '\n')
 
     
 # get cookies includeing real URL
@@ -75,7 +75,8 @@ def get_cookies(raw_url):
                 cache_url_list.remove(x)
                 with open(cache_address, 'w', encoding='utf-8') as cache:
                     for x in cache_url_list:
-                        cache.write("%s%s" % (x.strip(), os.linesep))
+                        # cache.write("%s%s" % (x.strip(), os.linesep))
+                        cache.write(x.strip() + '\n')
                         
     cmd_you_get = 'you-get -u ' + raw_url + '>' + data_dir
     os.system(cmd_you_get)
