@@ -6,6 +6,9 @@ import os
 import sys
 # import subprocess
 
+def cmd_character_replace(cmd):
+    cmd.replace()
+
 # get cookies includeing real URL
 def get_cookies(raw_url):
     cmd = 'you-get -u ' + raw_url + '>' + data_dir
@@ -14,10 +17,10 @@ def get_cookies(raw_url):
 
 # get command string for mpv
 def cmd_str(url_list, site_address):
-    cmd = 'mpv '
+    cmd = 'mpv ' + '"'
     count = len(url_list)
     if 1 == count:
-        cmd += url_list[0] + " --referrer='{}'".format(site_address) + " --no-ytdl"
+        cmd += url_list[0] + '"' + ' --referrer="{}"'.format(site_address) + " --no-ytdl"
     else:
         cmd += url_list[0]
         i = 1
@@ -41,18 +44,19 @@ def main():
     get_cookies(sys.argv[1])
     # get website's address
     tmp_list = sys.argv[1].split('/')
-    site_address = tmp_list[0] + '/' + tmp_list[1] + '/' + tmp_list[2]
+    site_address = tmp_list[0] + '/' + tmp_list[1] + '/' + tmp_list[2] + '/'
 
 
     # with open('./data.txt', 'r') as cookie:
-    with open(data_dir, 'r') as cookie:
+    with open(data_dir, 'r', encoding='utf-8') as cookie:
         url_list = [] # video and audio url
         for x in cookie.readlines():
             x = x.strip("[]\'")
             if len(x) > 8 and x[:8] == 'https://' or x[:7] == 'http://':
-                url_list.append(repr(x))
+                url_list.append(x.strip())
     
     cmd = cmd_str(url_list, site_address)
+    # print('cmd2: ' + cmd)
     os.system(cmd)
 
 
