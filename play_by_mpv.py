@@ -22,12 +22,12 @@ def cmd_str(url_list, site_address):
     if 1 == count:
         cmd += url_list[0] + '"' + ' --referrer="{}"'.format(site_address) + " --no-ytdl"
     else:
-        cmd += url_list[0]
+        cmd += url_list[0] + '"'
         i = 1
         while i < count - 1:
             cmd += ',' + url_list[i]
             i += 1
-        cmd += ' --audio-file=' + url_list[count - 1] + " --referrer='{}'".format(site_address) + " --no-ytdl"
+        cmd +=' --audio-file=' + '"' + url_list[count - 1] + '"' + " --referrer='{}'".format(site_address) + " --no-ytdl"
         # cmd += ' --audio-file=' + url_list[count - 1] + " --no-ytdl"
     return cmd 
 
