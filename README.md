@@ -47,3 +47,7 @@ Linux:
 ./play_by_mpv.py <url>              # url为复制的视频地址
 ```  
 例如，```./play_by_mpv # https://www.bilibili.com/bangumi/play/ss38233```    
+
+
+# 视频地址缓存  
+当某次解析播放成功后，其解析得到的视频地址会添加到 Play-by-mpv 目录下的 ```.cache``` 文件里，默认缓存大小为 30 个地址，可以更改同目录下的 ```config.conf``` 文件，将 ```cache_size``` 改为你想要的值。

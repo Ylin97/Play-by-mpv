@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import os 
+import sys
 from play_by_mpv import *
 
 
@@ -35,17 +36,27 @@ def test_cmd():
 
 
 def test():
+    
+    global is_play_ok
+
     if len(sys.argv) < 2:
         print("[参数错误]\nUsage: ./play-to-mpv.py <url>")
         exit()
-    # get_cookies(sys.argv[1])
+    # delete space characters for raw video url from head and end
+    raw_url = sys.argv[1].strip()
 
+    cmd = get_cookies(raw_url)
+    if cmd:
+        if os.system(cmd) != 0: # existent url is invalid
+            is_play_ok = False
+            get_cookies(raw_url)
+        else:
+            return 
+    
     # get website's address
-    tmp_list = sys.argv[1].split('/')
-    site_address = tmp_list[0] + '/' + tmp_list[1] + '/' + tmp_list[2]
+    tmp_list = raw_url.split('/')
+    site_address = tmp_list[0] + '/' + tmp_list[1] + '/' + tmp_list[2] + '/'
 
-
-    # with open('./data.txt', 'r') as cookie:
     with open(data_dir, 'r', encoding='utf-8') as cookie:
         url_list = [] # video and audio url
         for x in cookie.readlines():
@@ -54,15 +65,15 @@ def test():
                 url_list.append(x.strip())
     
     cmd = cmd_str(url_list, site_address)
-    print(cmd)
-    os.system(cmd)
-    # print(cmd)
+    # print('cmd2: ' + cmd)
+    if os.system(cmd) == 0:
+        write_cache(raw_url, cmd)
+
 
 if __name__ == '__main__':
-    # test_cmd()
     # get directory of data.txt
     data_dir = os.path.join('.', 'data.txt')
     # print(data_dir)
+    is_existed = False
+    is_play_ok = True
     test()
-
-# https://www.bilibili.com/bangumi/play/ss38233
