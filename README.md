@@ -34,20 +34,21 @@ pip3 install you-get
 # 用法  
 在 Bilibili 或 AcFun 网站复制视频播放页地址，然后进入 Play-by-mpv 目录：  
 
-Window:  
+Windows:  
 打开 PowerShell 或 命令提示符，执行：  
 ```   
 python .\play_by_mpv.py <url>       # url为复制的视频地址
 ```  
-例如，```python .\play_by_mpv.py # https://www.bilibili.com/bangumi/play/ss38233```
+例如，```python .\play_by_mpv.py https://www.bilibili.com/bangumi/play/ss38233```
 
 Linux:  
 打开终端，执行：  
 ```  
 ./play_by_mpv.py <url>              # url为复制的视频地址
 ```  
-例如，```./play_by_mpv # https://www.bilibili.com/bangumi/play/ss38233```    
+例如，```./play_by_mpv https://www.bilibili.com/bangumi/play/ss38233```    
 
+**you-get 获取B站的速度较慢，初次解析时可能出现较长等待时间，只要 you-get 不报错、不退出就请耐心等待......**
 
 # 视频地址缓存  
-当某次解析播放成功后，其解析得到的视频地址会添加到 Play-by-mpv 目录下的 ```.cache``` 文件里，默认缓存大小为 30 个地址，可以更改同目录下的 ```config.conf``` 文件，将 ```cache_size``` 改为你想要的值。
+为了加快播放缓冲速度，当某次解析播放成功后，其解析得到的视频地址会添加到 Play-by-mpv 目录下的 ```.cache``` 文件里，默认缓存大小为 30 个地址，可以更改同目录下的 ```config.conf``` 文件，将 ```cache_size``` 改为你想要的值。
